@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Respuesta del Modelo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+            position: relative;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Subir una Imagen</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required>
+            <button type="submit">Subir</button>
+        </form>
+        {% if image_path %}
+            <img src="{{ image_path }}" style="max-width: 400px;" alt="Imagen subida">
+        {% endif %}
+        <h1>Resultados de Clasificación</h1>
+        <ul>
+            {% if output %}
+                {% for item in output %}
+                <li>Pertenece a la clase  "{{ item.label }}" con un {{ "{:.2f}".format(item.score) }}% de exactitud</li>
+                {% endfor %}
+            {% else %}
+                <li>No hay resultados para mostrar.</li>
+            {% endif %}
+        </ul>
+    </div>
+    <footer>
+        <p>Made with FastAPI & ❤️</p>
+        <p>By: Augusto Javier Reyes Delgado</p>
+        <a href="https://github.com/augustoreyesdelgado">GitHub 👀</a>
+    </footer>
+</body>
+</html>
