@@ -6,7 +6,6 @@ from fastapi.staticfiles import StaticFiles
 import requests
 from dotenv import load_dotenv
 
-# Cargar variables de entorno desde .env
 load_dotenv()
 
 API_URL = os.getenv("API_URL")
